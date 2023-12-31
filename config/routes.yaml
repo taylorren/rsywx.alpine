@@ -6,4 +6,4 @@ book_detail:
     path: /books/{bookid}.html
     controller: App\Controller\BookController::detail
     requirements: 
-        id: '\d{5}'
+        bookid: '\d{5}'
