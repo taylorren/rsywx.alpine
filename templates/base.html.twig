@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html class='dark'>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}
+                任氏有无轩
+                            
+            {% endblock %}
+        </title>
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    </head>
+    <body class="m-0 p-0">
+        {% block body %}{% endblock %}
+    </body>
+</html>
