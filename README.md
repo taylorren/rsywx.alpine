@@ -1,15 +1,18 @@
-# Symfony starter project with Tailwind CSS and Flowbite
+# RSYWX V7
 
-This is a free and open-source starter project with a fresh install of Symfony, Tailwind CSS and Flowbite. The full guide for this repository can be viewed on the [Flowbite Documentation](https://flowbite.com/docs/getting-started/symfony/) website.
+I have been working on my personal book collection [site](https://rsywx.net) since [Symfony 2.x](https://symfony.com/). And ever since then, I have always sticked to it and upgrade my site from time to time. 
 
-## Getting started
+I have used other frameworks like Vue, React and (current before this) Svelte. 
 
-1. Run `composer install` and `npm install` to set up project dependencies.
+Now I will start another one with the following tech frameworks:
 
-2. Run `npm run watch` to start the Webpack front-end bundler to compile styles and JavaScript.
+1. Symfony 6.*
+2. Alpine.js 3.*
 
-3. Run `symfony server:start` to create a local development server.
+I want to combine my familiar Symfony development with the "reactivity" provided by Alpine. 
 
-## License
+So, this is it. 
 
-This project is open-source under the MIT license.
+Taylor
+
+2023.12.31
