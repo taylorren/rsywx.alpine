@@ -1,8 +1,114 @@
 {% extends 'base.html.twig' %}
+{% set book = data.detail %}
+{% set tags = data.tags %}
+{% set reviews = data.reviews %}
 
 {% block body %}
     {% include "layout/header.html.twig" %}
-    {{data}}
+    <div class="container mx-auto p-4">
+        <div class="grid grid-cols-6 gap-3">
+            <div class="col-span-5">
+                <div class="grid grid-cols-6 gap-5">
+                    <div class="grid col-span-3">
+                        <img src="{{book.img}}" alt="{{book.title}}" />
+                    </div>
+                    <div class="grd col-span-3">
+                        <P size="3xl">
+                            {{book.title}}
+                        </P>
+                        <P size="base">
+                            【{{book.region}}】
+                            <a href="/books/author/{book.author}" class="text-blue-700 dark:text-blue-500">
+                                {book.author}
+                            </a>
+                            著
+                                        
+                            {% if book.translated %}
+                                | 
+                                {{ book.copyrighter }}
+                                译
+                                            
+                            {% endif %}
+                        </P>
+                        <p>
+                            &nbsp;
+                        </p>
+                        <P/>
+                        <P>
+                            <svg style={inline} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-dash" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M5.5 6.5A.5.5 0 0 1 6 6h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
+                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg>
+                            &nbsp;ISBN: 
+                            <Badge color="yellow">
+                                {book.isbn}
+                            </Badge>
+                            | 分类号：
+                            <Badge color="yellow">
+                                {book.category}
+                            </Badge>
+                        </P>
+                        <P>
+                            <svg style={inline} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-week" viewBox="0 0 16 16">
+                                <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                            </svg>
+                            &nbsp;收藏时间：{book.purchdate}
+                        </P>
+                        <P>
+                            <svg style={inline} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags" viewBox="0 0 16 16">
+                                <path d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z" />
+                                <path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z" />
+                            </svg>
+                            &nbsp;TAGS:
+                            
+                                        
+                            {% for t in tags %}
+                                <Button color="yellow" size="xs">
+                                    <a href="/books/tag/{t}">
+                                        {t}
+                                    </a>
+                                </Button>
+                                &nbsp;
+                                            
+                            {% endfor %}
+
+                            <Button size="lg" on:click={() => (popupModal = true)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16" style={inline}>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                </svg>
+                            </Button>
+                            <Tooltip>
+                                添加自己的TAG
+                            </Tooltip>
+                        </P>
+                        <p>
+                            &nbsp;
+                        </p>
+                        <p>
+                            &nbsp;
+                        </p>
+                        <P>
+                            书籍简介：
+                        </P>
+                        <P size="2xl">
+                            {book.intro}
+                        </P>
+                        <Hr/>
+                        <P>
+                            书籍详情
+                        </P>
+                        <BookDetail/>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-row">
+                <Sidenav/>
+                <RelatedReview/>
+            </div>
+        </div>
+    </div>
+
     {% include "layout/footer.html.twig" %}
 
-    {% endblock%}
+{% endblock %}

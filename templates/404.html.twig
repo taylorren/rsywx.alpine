@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'layout/header.html.twig' %}
+    <div class="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
+
+        <h1 class="text-9xl font-extrabold text-white tracking-widest">
+            404
+                    
+        </h1>
+        <div class="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">
+            Page Not Found
+                        
+                    
+        </div>
+        <p>
+            &nbsp;
+                    
+        </p>
+        <p>
+            &nbsp;
+                    
+        </p>
+        <h4 class="text-3xl font-extrabold text-white tracking-widest">
+            我们认为，发生了一些意料之外的事情。
+            <br/>
+            但不必惊慌，一切都可控。请点击
+            <a href="/">
+                此处回到首页
+            </a>
+            。
+                    
+        </h4>
+
+    </div>
+    {% include 'layout/footer.html.twig' %}
+{% endblock %}

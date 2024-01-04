@@ -12,6 +12,7 @@ use GuzzleHttp\Promise;
 class DefaultController extends AbstractController
 {
     private $_base;
+    private $_client;
 
     public function __construct() {
         $dotenv=new Dotenv();
@@ -20,17 +21,16 @@ class DefaultController extends AbstractController
 
         //$this->_base=getenv('APP_ENV');
         $this->_base=$_ENV['BASE'];
+        $this->_client=new Client(['base_uri'=>$this->_base]);
     }
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()
     {
-        $client =new Client(['base_uri'=>$this->_base]);
-
         $promises=[
-            'summary'=>$client->getAsync('/books'),
-            'latestbook'=>$client->getAsync('/books/latest'),
+            'summary'=>$this->_client->getAsync('/books'),
+            'latestbook'=>$this->_client->getAsync('/books/latest'),
         ];
 
         $res=Promise\Utils::unwrap($promises);
